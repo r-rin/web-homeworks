@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="ua-UA">
+<html lang="uk-UA">
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -7,45 +7,67 @@
     <title>Форма</title>
 </head>
 <body>
-    <h1>Форма для додавання викладача</h1>
+    <form>
+        <header>
+            <h1>Форма для додавання викладача</h1>
+        </header>
+        
+        <section>
+            <label for="name">ПІБ Викладача:</label>
+            <input type="text" id="name"/>
+        </section>
+        <br/>
 
-    <label>ПІБ Викладача:</label>
-    <input type="text"/>
-    <br/><br/>
+        <section>
+            <label for="sex">Стать:</label>
+            <select id="sex">
+                <option value="male">Чоловік</option>
+                <option value="female">Жінка</option>
+            </select>
+        </section>
+        <br/>
 
-    <label>Стать:</label>
-    <select>
-        <option>Чоловік</option>
-        <option>Жінка</option>
-    </select>
-    <br/><br/>
+        <section>
+            <label for="birthday">Дата народження:</label>
+            <input type="date" id="birthday"/>
+        </section>
+        <br/>
 
-    <label>Дата народження:</label>
-    <input type="date"/>
-    <br/><br/>
+        <section>
+            <label for="email">Пошта:</label>
+            <input type="email" placeholder="example@mail.com" id="email"/>
+        </section>
+        <br/>
 
-    <label>Пошта:</label>
-    <input type="email" placeholder="example@mail.com"/>
-    <br/><br/>
+        <section>
+            <label for="phone_number">Номер телефону:</label>
+            <input id="phone_number" type="tel" placeholder="(123) 4567-890"/>
+        </section>
+        <br/>
 
-    <label>Номер телефону:</label>
-    <input type="tel" placeholder="(123) 4567-890"/>
-    <br/><br/>
+        <section>
+            <label for="preffered_color">Бажаний колір тла:</label>
+            <input id="preffered_color" type="color">
+        </section>
+        <br/>
 
-    <label>Бажаний колір тла:</label>
-    <input type="color">
-    <br/><br/>
+        <section>
+            <label for="country">Країна:</label>
+            <input id="country" type="text" placeholder="Назва країни"/> 
+        </section>
+        <br/>
+        
+        <section>
+            <label for="city">Місто:</label>
+            <input id="city" type="text" placeholder="Назва міста"/>
+        </section>
+        <br/>
 
-    <label>Країна:</label>
-    <input type="text" placeholder="Назва країни"/>
-    <br/><br/>
-    
-    <label>Місто:</label>
-    <input type="text" placeholder="Назва міста"/>
-    <br/><br/>
-
-    <label>Коментар:</label>
-    <br/>
-    <textarea placeholder="Коментар"></textarea>
+        <section>
+            <label for="comment">Коментар:</label>
+            <br/>
+            <textarea id="comment" placeholder="Коментар"></textarea> 
+        </section>
+    </form>
 </body>
 </html>
