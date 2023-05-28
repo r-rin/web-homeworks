@@ -1,0 +1,66 @@
+body {
+    background-color: gainsboro;
+}
+
+.products-manager {
+    display: flex;
+    padding: 10px;
+}
+
+.products-list {
+    width: 60%;
+    box-sizing: border-box;
+    background-color: white;
+    border: 2px solid rgb(159, 159, 159);
+    border-radius: 7px;
+    margin-right: 10px;
+    min-height: 20px;
+    height: fit-content;
+}
+
+.row {
+    padding: 7px 7px 7px 10px;
+    border-bottom: 2px solid lightgray;
+}
+
+.shopping-cart {
+    width: 40%;
+    box-sizing: border-box;
+    background-color: white;
+    border: 2px solid rgb(159, 159, 159);
+    border-radius: 7px;
+    min-height: 20px;
+    height: fit-content;
+}
+
+.search-field {
+    width: calc(100% - 75px);
+    box-sizing: border-box;
+    border: 2px solid lightgray;
+    border-right: 0;
+    border-radius: 5px 0px 0px 5px;
+}
+
+.search-button {
+    width: 75px;
+    color: white;
+    border: 2px solid dodgerblue;
+    background-color: dodgerblue;
+    border-radius: 0px 5px 5px 0px;
+}
+
+@media (max-width:500px){
+
+    .products-manager {
+        display: grid;
+    }
+    
+    .products-list {
+        margin: 0 0 10px 0;
+        width: 100%;
+    }
+
+    .shopping-cart {
+        width: 100%;
+    }
+}
