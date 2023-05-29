@@ -1,5 +1,6 @@
 body {
     background-color: gainsboro;
+    font-family: Helvetica;
 }
 
 .products-manager {
@@ -19,7 +20,13 @@ body {
 }
 
 .row {
-    padding: 12px 12px 12px 15px;
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    position: relative;
+    min-height: 50px;
+    align-items: center;
+    padding: 0px 12px 0px 15px;
     border-bottom: 1px solid lightgray;
 }
 
@@ -39,18 +46,68 @@ body {
     border: 2px solid lightgray;
     border-right: 0;
     border-radius: 5px 0px 0px 5px;
+    font-size: medium;
     padding: 10px;
+}
+
+.button {
+    height: 32px;
+    padding: 0px 15px 5px 15px ;
+    color: gray;
+    font-size:1.5ch;
+    border: 0px;
+    border-radius: 5px 5px 5px 5px;
+    box-shadow: inset 0px -5px lightgrey;
 }
 
 .search-button {
     width: 100px;
-    color: white;
-    font-size: medium;
-    border: 2px solid dodgerblue;
-    background-color: dodgerblue;
+    height: 42px;
+    background-color: dodgerblue; 
+    box-shadow: inset 0px -5px rgb(29, 124, 220); 
+    color: white; 
     border-radius: 0px 5px 5px 0px;
+    font-size:medium;
+    border: 0px;
 }
 
+.quanity-manager {
+    display: flex;
+    align-items: center;
+}
+
+.quanity-manager > * {
+    margin: 0px 5px 0px 5px;
+}
+
+.quanity {
+    padding: 7px 12px;
+    border-radius: 10px;
+    text-align: center;
+    background-color: lightgray;
+}
+
+.add-button {
+    background-color: rgb(20, 176, 20); 
+    box-shadow: inset 0 -3px green;
+    height: 40px;
+    width: 40px;
+    border: 0;
+    border-radius: 50%;
+    font-size: x-large;
+    color: white;
+}
+
+.remove-button {
+    background-color: red; 
+    box-shadow: inset 0 -3px firebrick;
+    height: 40px;
+    width: 40px;
+    border: 0;
+    border-radius: 50%;
+    font-size: x-large;
+    color: white;
+}
 @media (max-width:500px){
 
     .products-manager {

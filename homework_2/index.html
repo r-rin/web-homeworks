@@ -10,13 +10,33 @@
 <body>
     <section class="products-manager">
         <section class="products-list">
-            <section class="row" style="display: flex;">
-                <input class="search-field" type="text"/><button class="search-button">Знайти</button>
+
+            <section class="row" style="padding: 8px 12px 8px 12px;">
+                <input class="search-field" type="text" placeholder="Назва товару"/>
+                <button class="search-button">Знайти</button>
             </section>
             
-            <section class="row" style="display: flex;">
-                <span>sfasgd</span>
-                <span>safsagsdg</span>
+            <section class="row">
+                <span><del>Помідори</del></span>
+                <div class="quanity-manager">
+                    <button type="button" class="add-button">+</button>
+                    <div class="quanity">2</div>
+                    <button type="button" class="remove-button">-</button>
+                </div>
+                <button class="button">Не куплено</button>
+            </section>
+
+            <section class="row">
+                <span>Печиво</span>
+                <div class="quanity-manager">
+                    <button type="button" class="add-button">+</button>
+                    <div class="quanity">1</div>
+                    <button type="button" class="remove-button">-</button>
+                </div>
+                <div style="display: flex;">
+                    <button class="button">Не куплено</button>
+                    <button type="button" class="remove-button" style="border-radius: 5px; font-size: medium;">x</button>
+                </div>
             </section>
 
             <section class="row" style="border: 0;">
