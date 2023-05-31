@@ -4,52 +4,92 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>Магазин</title>
     <link rel="stylesheet" type="text/css" href="main.css"/>
 </head>
 <body>
     <section class="products-manager">
         <section class="products-list">
 
-            <section class="row" style="padding: 8px 12px 8px 12px;">
+            <section class="row" style="display: flex; padding: 8px 12px 8px 12px;">
                 <input class="search-field" type="text" placeholder="Назва товару"/>
                 <button class="search-button">Знайти</button>
             </section>
             
             <section class="row">
-                <span><del>Помідори</del></span>
-                <div class="quanity-manager">
-                    <button type="button" class="add-button">+</button>
+                <section class="row-section" style="justify-content: left;">
+                    <span style="margin: 5px;"><del>Помідори</del></span>
+                </section>
+                <section class="row-section">
+                    <button type="button" class="add-button" data-tooltip="Додати товар до кошика">+</button>
                     <div class="quanity">2</div>
-                    <button type="button" class="remove-button">-</button>
-                </div>
-                <button class="button">Не куплено</button>
+                    <button type="button" class="remove-button" data-tooltip="Видалити товар з кошика">-</button>
+                </section>
+                <section class="row-section" style="justify-content: right;">
+                    <button class="button" data-tooltip="Супер підказка, шось не куплено">Не куплено</button> 
+                </section>
             </section>
 
             <section class="row">
-                <span>Печиво</span>
-                <div class="quanity-manager">
-                    <button type="button" class="add-button">+</button>
+                <section class="row-section" style="justify-content: left;">
+                    <span style="margin: 5px;">Печиво</span>
+                </section>
+                <section class="row-section">
+                    <button type="button" class="add-button" data-tooltip="Додати товар до кошика">+</button>
                     <div class="quanity">1</div>
-                    <button type="button" class="remove-button">-</button>
-                </div>
-                <div style="display: flex;">
-                    <button class="button">Не куплено</button>
-                    <button type="button" class="remove-button" style="border-radius: 5px; font-size: medium;">x</button>
-                </div>
+                    <button type="button" class="remove-button" data-tooltip="Видалити товар з кошика">-</button>
+                </section>
+                <section class="row-section" style="justify-content: right;">
+                    <button class="button" data-tooltip="Товар прибано">Куплено</button>
+                    <button type="button" class="remove-button" style="border-radius: 5px; font-size: small; padding: 0px;" data-tooltip="Шось закрити, видалити">✖</button>
+                </section>
             </section>
 
             <section class="row" style="border: 0;">
-                <span>
-                    Помідори бог з ними
-                </span>
+                <section class="row-section" style="justify-content: left;">
+                    <input class="text-input" type="text" placeholder="Товар" value="Сир"/>
+                </section>
+                <section class="row-section">
+                    <button type="button" class="add-button" data-tooltip="Додати товар до кошика">+</button>
+                    <div class="quanity">1</div>
+                    <button type="button" class="remove-button" data-tooltip="Видалити товар з кошика" disabled>-</button>
+                </section>
+                <section class="row-section" style="justify-content: right;">
+                    <button class="button" data-tooltip="Товар прибано">Куплено</button>
+                    <button type="button" class="remove-button" style="border-radius: 5px; font-size: small; padding: 0;" data-tooltip="Шось закрити, видалити">✖</button>
+                </section>
             </section>
         </section>
 
         <section class="shopping-cart">
-
+            <section class="row"><span style="font-weight: bolder; font-size: larger;">Залишилося</span></section>
+            <section class="row" style="justify-content: normal;">
+                <div class="amount-box" style="margin: 7px 10px 7px 0px;">
+                    <span style="font-size: small; font-weight: bolder;">Печиво</span>
+                    <div class="quanity" style="background-color: orange; color: white; border-radius: 50%; margin-left: 5px; font-weight: bolder;">2</div>
+                </div>
+                <div class="amount-box" style="margin: 7px 10px 7px 0px;">
+                    <span style="font-size: small; font-weight: bolder;">Сир</span>
+                    <div class="quanity" style="background-color: orange; color: white; border-radius: 50%; margin-left: 5px; font-weight: bolder;">1</div>
+                </div>
+            </section>
+            <section class="row"><span style="font-weight: bolder; font-size: larger;">Куплено</span></section>
+            <section class="row">
+                <div class="amount-box" style="margin: 7px 10px 7px 0px;">
+                    <span style="font-size: small; font-weight: bolder;"><del>Помідори</del></span>
+                    <div class="quanity" style="background-color: orange; color: white; border-radius: 50%; margin-left: 5px; font-weight: bolder;"><del>2</del></div>
+                </div>
+            </section>
         </section>
     </section>
+
+    <section class="badge">
+        <p style="font-size: x-large; font-weight: bold;text-align: center; margin-bottom: 35px;">Buy List</p>
+        <span>Created by:</span>
+        <br>
+        <span style="font-size: large;">Rafikov Rinat</span>
+    </section>
+
     <main>
 
     </main>

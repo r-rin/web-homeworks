@@ -26,7 +26,7 @@ body {
     position: relative;
     min-height: 50px;
     align-items: center;
-    padding: 0px 12px 0px 15px;
+    padding: 5px 12px 5px 15px;
     border-bottom: 1px solid lightgray;
 }
 
@@ -52,12 +52,25 @@ body {
 
 .button {
     height: 32px;
-    padding: 0px 15px 5px 15px ;
+    padding: 10px 15px 30px 15px ;
+    margin: 5px;
     color: gray;
     font-size:1.5ch;
     border: 0px;
     border-radius: 5px 5px 5px 5px;
     box-shadow: inset 0px -5px lightgrey;
+    cursor: pointer;
+    position: relative;
+}
+
+.add-button:disabled {
+    background-color: rgb(182, 227, 182);
+    box-shadow: inset 0 -3px rgb(139, 174, 139);
+}
+
+.remove-button:disabled {
+    background-color:rgb(217, 172, 172);
+    box-shadow: inset 0 -3px rgb(160, 127, 127);
 }
 
 .search-button {
@@ -71,9 +84,12 @@ body {
     border: 0px;
 }
 
-.quanity-manager {
+.row-section {
+    width: 33.33%;
     display: flex;
     align-items: center;
+    justify-content: center;
+    min-width: max-content;
 }
 
 .quanity-manager > * {
@@ -88,8 +104,11 @@ body {
 }
 
 .add-button {
+    cursor: pointer;
+    position: relative;
     background-color: rgb(20, 176, 20); 
     box-shadow: inset 0 -3px green;
+    margin: 5px;
     height: 40px;
     width: 40px;
     border: 0;
@@ -99,15 +118,101 @@ body {
 }
 
 .remove-button {
+    cursor: pointer;
+    position: relative;
     background-color: red; 
     box-shadow: inset 0 -3px firebrick;
+    margin: 5px;
     height: 40px;
     width: 40px;
     border: 0;
+    padding: 0px 1px 5px 0px;
     border-radius: 50%;
     font-size: x-large;
     color: white;
 }
+
+.amount-box {
+    display: flex;
+    align-items: center;
+    background-color: #EFEFEF;
+    color: gray;
+    border-radius: 5px;
+    padding: 5px;
+}
+
+.text-input {
+    border: 2px solid lightgray;
+    width: 100px;
+    border-radius: 5px;
+    height: 25px;
+    margin: 5px;
+}
+
+.badge {
+    position: absolute;
+    bottom: 0;
+    left: 80px;
+    width: 150px;
+    height: 70px;
+    transition: all 1s ease-out;
+    background-color: blueviolet;
+    color: white;
+    align-items: center;
+    display: block;
+    padding: 10px;
+    overflow: hidden;
+    border-radius: 25px 25px 0px 0px;
+}
+
+.badge:hover {
+    transition: all 1s ease-out;
+    height: 130px;
+    background-color: slateblue;
+}
+
+.button::before, .add-button::before, .remove-button::before{
+    content: attr(data-tooltip);
+    font: initial;
+    font-family: Arial, Helvetica, sans-serif;
+    filter: initial;
+    position: absolute;
+    bottom: calc(100% + 5px);
+    left: 50%;
+    transform: translateX(-50%);
+    padding: 8px;
+    background-color: blueviolet;
+    color: white;
+    border-radius: 8px;
+    opacity: 0;
+    visibility: hidden;
+    transition: opacity 0.3s, visibility 0.3s, transform 0.3s;
+  }
+  
+  .button:hover::before, .add-button:hover::before, .remove-button:hover::before {
+    opacity: 1;
+    visibility: visible;
+    transform: translateX(-50%) scale(1);
+    filter: initial;
+  }
+
+@media print {
+    .badge {
+        background-color: white;
+        color: black;
+        border: 2px solid darkgray;
+        height: 40px;
+    }
+
+    .badge > p:first-of-type {
+        display: none;
+    }
+
+    .badge > span {
+        margin-left: 25px;
+    }
+}
+
 @media (max-width:500px){
 
     .products-manager {
