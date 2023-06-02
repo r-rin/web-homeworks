@@ -40,8 +40,8 @@
                     <button type="button" class="remove-button" data-tooltip="Видалити товар з кошика">-</button>
                 </section>
                 <section class="row-section" style="justify-content: right;">
-                    <button class="button" data-tooltip="Товар прибано">Куплено</button>
-                    <button type="button" class="remove-button" style="border-radius: 5px; font-size: small; padding: 0px;" data-tooltip="Шось закрити, видалити">✖</button>
+                    <button class="button" data-tooltip="Товар придбано">Куплено</button>
+                    <button type="button" class="cancel-button" data-tooltip="Шось закрити, видалити">✖</button>
                 </section>
             </section>
 
@@ -55,43 +55,51 @@
                     <button type="button" class="remove-button" data-tooltip="Видалити товар з кошика" disabled>-</button>
                 </section>
                 <section class="row-section" style="justify-content: right;">
-                    <button class="button" data-tooltip="Товар прибано">Куплено</button>
-                    <button type="button" class="remove-button" style="border-radius: 5px; font-size: small; padding: 0;" data-tooltip="Шось закрити, видалити">✖</button>
+                    <button class="button" data-tooltip="Товар придбано">Куплено</button>
+                    <button type="button" class="cancel-button" data-tooltip="Шось закрити, видалити">✖</button>
                 </section>
             </section>
         </section>
 
         <section class="shopping-cart">
-            <section class="row"><span style="font-weight: bolder; font-size: larger;">Залишилося</span></section>
+            <section class="row">
+                <span style="font-weight: bolder; font-size: larger;">Залишилося</span>
+            </section>
+            
             <section class="row" style="justify-content: normal;">
+
                 <div class="amount-box" style="margin: 7px 10px 7px 0px;">
                     <span style="font-size: small; font-weight: bolder;">Печиво</span>
-                    <div class="quanity" style="background-color: orange; color: white; border-radius: 50%; margin-left: 5px; font-weight: bolder;">2</div>
+                    <div class="quanity-added">2</div>
                 </div>
+
                 <div class="amount-box" style="margin: 7px 10px 7px 0px;">
                     <span style="font-size: small; font-weight: bolder;">Сир</span>
-                    <div class="quanity" style="background-color: orange; color: white; border-radius: 50%; margin-left: 5px; font-weight: bolder;">1</div>
+                    <div class="quanity-added">1</div>
                 </div>
+
             </section>
-            <section class="row"><span style="font-weight: bolder; font-size: larger;">Куплено</span></section>
+            
+            <section class="row">
+                <span style="font-weight: bolder; font-size: larger;">Куплено</span>
+            </section>
+            
             <section class="row">
                 <div class="amount-box" style="margin: 7px 10px 7px 0px;">
                     <span style="font-size: small; font-weight: bolder;"><del>Помідори</del></span>
-                    <div class="quanity" style="background-color: orange; color: white; border-radius: 50%; margin-left: 5px; font-weight: bolder;"><del>2</del></div>
+                    <div class="quanity-added"><del>2</del></div>
                 </div>
             </section>
+
         </section>
+
     </section>
 
-    <section class="badge">
+    <div class="badge">
         <p style="font-size: x-large; font-weight: bold;text-align: center; margin-bottom: 35px;">Buy List</p>
         <span>Created by:</span>
         <br>
         <span style="font-size: large;">Rafikov Rinat</span>
-    </section>
-
-    <main>
-
-    </main>
+    </div>
 </body>
 </html>

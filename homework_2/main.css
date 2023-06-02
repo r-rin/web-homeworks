@@ -132,6 +132,30 @@ body {
     color: white;
 }
 
+.cancel-button {
+    cursor: pointer;
+    position: relative;
+    background-color: red; 
+    box-shadow: inset 0 -3px firebrick;
+    margin: 5px;
+    height: 40px;
+    width: 40px;
+    border: 0;
+    color: white;
+    border-radius: 5px; 
+    font-size: small; 
+}
+
+.quanity-added {
+    background-color: orange; 
+    color: white; 
+    border-radius: 50%; 
+    margin-left: 5px; 
+    font-weight: bolder;
+    padding: 7px 12px;
+    text-align: center;
+}
+
 .amount-box {
     display: flex;
     align-items: center;
