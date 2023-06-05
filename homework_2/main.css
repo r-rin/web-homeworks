@@ -162,6 +162,7 @@ body {
     background-color: #EFEFEF;
     color: gray;
     border-radius: 5px;
+    margin: 5px 5px 5px 5px;
     padding: 5px;
 }
 
@@ -173,8 +174,14 @@ body {
     margin: 5px;
 }
 
+.amount-title {
+    font-size: small; 
+    font-weight: bolder; 
+    word-break: break-all;
+}
+
 .badge {
-    position: absolute;
+    position: fixed;
     bottom: 0;
     left: 80px;
     width: 150px;
