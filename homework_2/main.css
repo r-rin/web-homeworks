@@ -9,7 +9,7 @@ body {
 }
 
 .products-list {
-    width: 60%;
+    width: 65%;
     box-sizing: border-box;
     background-color: white;
     border: 1px solid lightgray;
@@ -31,7 +31,7 @@ body {
 }
 
 .shopping-cart {
-    width: 40%;
+    width: 35%;
     box-sizing: border-box;
     background-color: white;
     border: 1px solid lightgray;
