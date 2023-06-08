@@ -30,6 +30,10 @@ body {
     border-bottom: 1px solid lightgray;
 }
 
+.products-list .row {
+    flex-wrap: nowrap;
+}
+
 .shopping-cart {
     width: 35%;
     box-sizing: border-box;
@@ -91,7 +95,7 @@ body {
     display: flex;
     align-items: center;
     justify-content: center;
-    min-width: fit-content;
+    min-width: 33,33%;
 }
 
 .quanity-manager > * {
@@ -246,7 +250,7 @@ body {
     }
 }
 
-@media (max-width:500px){
+@media (max-width:750px){
 
     .products-manager {
         display: grid;
