@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="uk-UA">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Магазин</title>
+    <link rel="stylesheet" type="text/css" href="main.css"/>
+    <script src="main.js"></script>
+</head>
+<body>
+    <section class="products-manager">
+        <section class="products-list">
+
+            <section class="row" style="display: flex; padding: 8px 12px 8px 12px;">
+                <input class="add-product-field" type="text" placeholder="Назва товару"/>
+                <button class="add-product-button" onclick="addProduct()">Додати</button>
+            </section>
+            
+            <section class="row" data-name="Помідори">
+                <section class="row-section" style="justify-content: left;">
+                    <div class="product-title" onclick="editTitle(this)" style="text-decoration: line-through;">Помідори</div>
+                </section>
+                <section class="row-section">
+                    <div class="quanity">2</div>
+                </section>
+                <section class="row-section" style="justify-content: right;">
+                    <button class="button" onclick="setProductBought(this)" data-tooltip="Супер підказка, шось не куплено" data-status="1">Не куплено</button> 
+                </section>
+            </section>
+
+            <section class="row" data-name="Печиво">
+                <section class="row-section" style="justify-content: left;">
+                    <div class="product-title" onclick="editTitle(this)">Печиво</div>
+                </section>
+                <section class="row-section">
+                    <button type="button" class="add-button" onclick="changeAmount(this, true)" data-tooltip="Додати товар до кошика">+</button>
+                    <div class="quanity">2</div>
+                    <button type="button" class="remove-button" onclick="changeAmount(this, false)" data-tooltip="Видалити товар з кошика">-</button>
+                </section>
+                <section class="row-section" style="justify-content: right;">
+                    <button class="button" onclick="setProductBought(this)" data-tooltip="Товар придбано" data-status="0">Куплено</button>
+                    <button type="button" onclick="remove(this)" class="cancel-button" data-tooltip="Шось закрити, видалити">✖</button>
+                </section>
+            </section>
+
+            <section class="row" data-name="Сир">
+                <section class="row-section" style="justify-content: left;">
+                    <div class="product-title">Сир</div>
+                </section>
+                <section class="row-section">
+                    <button type="button" class="add-button" onclick="changeAmount(this, true)" data-tooltip="Додати товар до кошика">+</button>
+                    <div class="quanity">1</div>
+                    <button type="button" class="remove-button" onclick="changeAmount(this, false)" data-tooltip="Видалити товар з кошика" disabled>-</button>
+                </section>
+                <section class="row-section" style="justify-content: right;">
+                    <button class="button" onclick="setProductBought(this)" data-tooltip="Товар придбано" data-status="0">Куплено</button>
+                    <button type="button" onclick="remove(this)" class="cancel-button" data-tooltip="Шось закрити, видалити">✖</button>
+                </section>
+            </section>
+
+            
+        </section>
+
+        <section class="shopping-cart">
+            <section class="row">
+                <span style="font-weight: bolder; font-size: larger;">Залишилося</span>
+            </section>
+            
+            <section class="row" style="justify-content: normal;">
+
+                <div class="amount-box" data-name="Печиво">
+                    <span class="amount-title">Печиво</span>
+                    <div class="quanity-added">2</div>
+                </div>
+
+                <div class="amount-box" data-name="Сир">
+                    <span class="amount-title">Сир</span>
+                    <div class="quanity-added">1</div>
+                </div>
+
+            </section>
+            
+            <section class="row">
+                <span style="font-weight: bolder; font-size: larger;">Куплено</span>
+            </section>
+            
+            <section class="row" style="justify-content: normal;">
+                <div class="amount-box" data-name="Помідори">
+                    <span class="amount-title" style="text-decoration: line-through;">Помідори</span>
+                    <div class="quanity-added" style="text-decoration: line-through;">2</div>
+                </div>
+            </section>
+
+        </section>
+
+    </section>
+
+    <div class="badge">
+        <p style="font-size: x-large; font-weight: bold;text-align: center; margin-bottom: 35px;">Buy List</p>
+        <span>Created by:</span>
+        <br>
+        <span style="font-size: large;">Rafikov Rinat</span>
+    </div>
+    
+    <template id="productrow">
+        <section class="row" data-name="">
+            <section class="row-section" style="justify-content: left;">
+                <div class="product-title" onclick="editTitle(this)"></div>
+            </section>
+            <section class="row-section">
+                <button type="button" class="add-button" onclick="changeAmount(this, true)" data-tooltip="Збільшити кількість">+</button>
+                <div class="quanity">1</div>
+                <button type="button" class="remove-button" onclick="changeAmount(this, false)" data-tooltip="Зменшити кількість" disabled>-</button>
+            </section>
+            <section class="row-section" style="justify-content: right;">
+                <button class="button" onclick="setProductBought(this)" data-tooltip="Зробити товар придбаним" data-status="0">Куплено</button>
+                <button type="button" onclick="remove(this)" class="cancel-button" data-tooltip="Видалити товар">✖</button>
+            </section>
+        </section>
+    </template>
+
+    <template id="productcard">
+        <div class="amount-box">
+            <span class="amount-title"></span>
+             <div class="quanity-added">1</div>
+        </div>
+    </template>
+
+    <template id="titleinput">
+        <input type="text" class="text-input"/>
+    </template>
+</body>
+</html>
