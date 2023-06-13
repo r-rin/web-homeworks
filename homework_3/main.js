@@ -1,36 +1,114 @@
-var goodsList = [["Помідори", 2, true], ["Печиво", 1, false], ["Сир", 1, false]];
-var editedDiv;
+let goodsList = [];
+let editedDiv;
+const productsList = document.querySelector(".products-list");
+const shoppingCart = document.querySelector(".shopping-cart");
 
-function addProduct() {
-    const productName = document.querySelector(".add-product-field").value;
-    if(productName.length != 0){
-        goodsList[goodsList.length] = [productName, 1, false];
-        const productsList = document.querySelector(".products-list");
-        const shoppingCart = document.querySelector(".shopping-cart");
+const doPageReload = true;
+
+function updateLocalStorage(){
+    localStorage.setItem("storedArray", JSON.stringify(goodsList));
+}
+
+window.onload = () => {
+    let starterArray = [["Помідори", 2, true], ["Печиво", 1, false], ["Сир", 1, false]];
+
+    if(localStorage.getItem("storedArray") != null){
+        starterArray = JSON.parse(localStorage.getItem("storedArray"));
+    }
+
+    for(let productArray of starterArray){
+        addProduct(productArray);
+        goodsList.push(productArray);
+        updateLocalStorage();
+    } 
+}
+
+function isUnique(title) {
+    for(let productArray of goodsList){
+        let existingTitle = String(productArray[0]).toLowerCase();
+        if(existingTitle.localeCompare(title.toLowerCase()) == 0) return false;
+    }
+    return true;
+}
+
+function addProduct(productArray) {
+    let productTitle = productArray[0];
+    let productAmount = productArray[1];
+    let productSold = productArray[2];
+
+    let row = document.querySelector("#productrow").content.querySelector(".row").cloneNode(true);
+    row.dataset.name = productTitle;
+    let rowSectionsCollection = row.querySelectorAll(".row-section");
         
-        let template = document.querySelector("#productrow").content.cloneNode(true);
-        let row = template.querySelector(".row");
-        row.dataset.name = productName;
-        let rowSectionsCollection = row.querySelectorAll(".row-section");
-        
-        rowSectionsCollection[0].querySelector(".product-title").appendChild(document.createTextNode(productName));
-        productsList.append(template);
+    rowSectionsCollection[0].querySelector(".product-title").appendChild(document.createTextNode(productTitle));
+    rowSectionsCollection[1].querySelector(".quanity").appendChild(document.createTextNode(productAmount));
 
-        template = document.querySelector("#productcard").content.cloneNode(true);
-        card = template.querySelector(".amount-box");
-        card.dataset.name = productName;
+    if(productAmount <= 1){
+        rowSectionsCollection[1].querySelector(".remove-button").disabled = true;
+    }
 
-        card.querySelector(".amount-title").appendChild(document.createTextNode(productName))
-        shoppingCart.querySelectorAll(".row")[1].appendChild(template);
+    if(productSold){
+        rowSectionsCollection[0].querySelector(".product-title").style.textDecoration = "line-through";
+        rowSectionsCollection[1].querySelector(".remove-button").remove();
+        rowSectionsCollection[1].querySelector(".add-button").remove();
+        rowSectionsCollection[2].querySelector(".cancel-button").remove();
+        rowSectionsCollection[2].querySelector(".button").dataset.status = "1";
+        rowSectionsCollection[2].querySelector(".button").textContent = "Не куплено";
+    }
+    productsList.append(row);
+
+    card = document.querySelector("#productcard").content.querySelector(".amount-box").cloneNode(true);
+    card.dataset.name = productTitle;
+
+    card.querySelector(".amount-title").appendChild(document.createTextNode(productTitle));
+    card.querySelector(".quanity-added").appendChild(document.createTextNode(productAmount));
+
+    if(productSold){
+        card.querySelector(".amount-title").style.textDecoration = "line-through";
+        card.querySelector(".quanity-added").style.textDecoration = "line-through";
+        shoppingCart.querySelectorAll(".row")[3].appendChild(card);
+    } else {
+        shoppingCart.querySelectorAll(".row")[1].appendChild(card);
     }
 }
 
 
+function addNewProduct() {
+    const productName = document.querySelector(".add-product-field").value;
+    let array = [productName, 1, false];
+    if((productName.length != 0) && isUnique(productName)){
+        addProduct(array);
+        goodsList.push(array);
+        updateLocalStorage();
+    } else {
+        window.alert("Надана порожня назва або назва товару, який вже існує!");
+    }
+}
+
 function changeAmount(element, isIncrease) {
+    let productName = element.parentElement.parentElement.dataset.name;
+
+    for(let productArray of goodsList){
+        if(productName.localeCompare(productArray[0]) == 0){
+            if(isIncrease){
+                productArray[1] = productArray[1] + 1;
+            } else {
+                productArray[1] = productArray[1] - 1;
+            }
+            updateLocalStorage();
+            if(doPageReload){
+                location.reload();
+            } else {
+                changeAmountOnPage(element, isIncrease);
+            }
+        }
+    }
+}
+
+function changeAmountOnPage(element, isIncrease) {
     let productName = element.parentElement.parentElement.dataset.name;
     let section = element.parentElement;
     let quanityElem = section.querySelector(".quanity");
-
     let decreaseButton = section.querySelector(".remove-button");
 
     if(quanityElem.textContent === "1" && isIncrease){
@@ -62,7 +140,23 @@ function changeAmount(element, isIncrease) {
     }
 }
 
-function setProductBought(element){
+function setProductBought(element) {
+    let productName = element.parentElement.parentElement.dataset.name;
+
+    for(let productArray of goodsList){
+        if(productName.localeCompare(productArray[0]) == 0){
+            productArray[2] = !productArray[2];
+            updateLocalStorage();
+            if(doPageReload){
+                location.reload();
+            } else {
+                setProductBoughtOnPage(element);
+            }
+        }
+    }
+}
+
+function setProductBoughtOnPage(element){
     let productName = element.parentElement.parentElement.dataset.name;
     let statusValue = element.dataset.status;
     let currentRow = element.parentElement.parentElement;
