@@ -234,7 +234,8 @@ function remove(element) {
 
     for(let productArray of goodsList){
         if(productName.localeCompare(productArray[0]) == 0){
-            goodsList.pop(productArray);
+            let productIndex = goodsList.indexOf(productArray);
+            goodsList.splice(productIndex, 1);
             updateLocalStorage();
             if(doPageReload){
                 location.reload();
