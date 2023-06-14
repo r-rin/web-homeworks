@@ -26,8 +26,8 @@ window.onload = () => {
 
 function isUnique(title) {
     for(let productArray of goodsList){
-        let existingTitle = String(productArray[0]).toLowerCase();
-        if(existingTitle.localeCompare(title.toLowerCase()) == 0) return false;
+        let existingTitle = String(productArray[0]).toLowerCase().replace(/\s/g,'');
+        if(existingTitle.localeCompare(title.toLowerCase().replace(/\s/g,'')) == 0) return false;
     }
     return true;
 }
@@ -75,9 +75,9 @@ function addProduct(productArray) {
 
 
 function addNewProduct() {
-    const productName = document.querySelector(".add-product-field").value;
+    const productName = document.querySelector(".add-product-field").value.trim();
     let array = [productName, 1, false];
-    if((productName.length != 0) && isUnique(productName)){
+    if((productName.replace(/\s/g,'').length != 0) && isUnique(productName)){
         addProduct(array);
         goodsList.push(array);
         updateLocalStorage();
@@ -177,6 +177,8 @@ function setProductBoughtOnPage(element){
 
         if(Number(amount) > 1){
             rowSectionAmount.querySelector(".remove-button").disabled = false;
+        } else {
+            rowSectionAmount.querySelector(".remove-button").disabled = true;
         }
         
         rowSectionsCollection[0].querySelector(".product-title").style.textDecoration = "none";
@@ -276,7 +278,7 @@ function editTitle(element) {
         element.replaceWith(titleInput);
     
         titleInput.addEventListener('blur', function() {
-            let newTitle = titleInput.value;
+            let newTitle = titleInput.value.trim();
             if(isUnique(newTitle) && newTitle.length > 0){
                 editedDivSection.dataset.name = newTitle;
                 let newDiv = editedDiv.cloneNode(true);
