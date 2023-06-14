@@ -1,9 +1,10 @@
 let goodsList = [];
 let editedDiv;
+let editedDivSection;
 const productsList = document.querySelector(".products-list");
 const shoppingCart = document.querySelector(".shopping-cart");
 
-const doPageReload = true;
+const doPageReload = false;
 
 function updateLocalStorage(){
     localStorage.setItem("storedArray", JSON.stringify(goodsList));
@@ -228,15 +229,30 @@ function setProductBoughtOnPage(element){
     }
 }
 
-function remove(element){
+function remove(element) {
+    let productName = element.parentElement.parentElement.dataset.name;
+
+    for(let productArray of goodsList){
+        if(productName.localeCompare(productArray[0]) == 0){
+            goodsList.pop(productArray);
+            updateLocalStorage();
+            if(doPageReload){
+                location.reload();
+            } else {
+                removeOnPage(element);
+            }
+        }
+    }
+}
+
+function removeOnPage(element){
     let productName = element.parentElement.parentElement.dataset.name;
     element.parentElement.parentElement.remove();
 
-    let shoppingCart = document.querySelector(".shopping-cart");
     let cardsCollection = shoppingCart.querySelectorAll(".row")[1].querySelectorAll(".amount-box");
     let cardsArray = [].slice.call(cardsCollection);
 
-    for(const card of [].slice.call(cardsCollection)){
+    for(const card of cardsArray){
         if(card.dataset.name === productName) {
             card.remove();
         }
@@ -244,37 +260,51 @@ function remove(element){
 }
 
 function editTitle(element) {
-    editedDiv = element.cloneNode(true);
-    let productName = editedDiv.textContent;
-    
-    let titleInput = document.querySelector("#titleinput").content.querySelector("input").cloneNode(true);
-    titleInput.value = productName;
-    
-    element.replaceWith(titleInput);
-    
-    titleInput.addEventListener('blur', function() {
-        let newDiv = editedDiv.cloneNode(true);
-        newDiv.textContent = titleInput.value;
-        titleInput.replaceWith(newDiv);
 
-        let shoppingCart = document.querySelector(".shopping-cart");
-        let cartRows = shoppingCart.querySelectorAll(".row");
-        let cardsArray = [].slice.call(cartRows[1].querySelectorAll(".amount-box"));
+    let rowSectionsCollection = element.parentElement.parentElement.querySelectorAll(".row-section");
+    let boughtButton = rowSectionsCollection[2].querySelector(".button");
 
-        for(const card of cardsArray){
-            if(card.dataset.name === productName) {
-                card.querySelector(".amount-title").textContent = newDiv.textContent;
-                card.dataset.name = newDiv.textContent;
+    if(boughtButton.dataset.status == "0"){
+        editedDiv = element.cloneNode(true);
+        editedDivSection = element.parentElement.parentElement;
+        let productTitle = editedDiv.textContent;
+    
+        let titleInput = document.querySelector("#titleinput").content.querySelector("input").cloneNode(true);
+        titleInput.value = productTitle;
+    
+        element.replaceWith(titleInput);
+    
+        titleInput.addEventListener('blur', function() {
+            let newTitle = titleInput.value;
+            if(isUnique(newTitle) && newTitle.length > 0){
+                editedDivSection.dataset.name = newTitle;
+                let newDiv = editedDiv.cloneNode(true);
+                newDiv.textContent = newTitle;
+                titleInput.replaceWith(newDiv);
+
+                let cartRows = shoppingCart.querySelectorAll(".row");
+                let cardsArray = [].slice.call(cartRows[1].querySelectorAll(".amount-box"));
+
+                for(const card of cardsArray){
+                    if(card.dataset.name === productTitle) {
+                        card.querySelector(".amount-title").textContent = newTitle;
+                        card.dataset.name = newTitle;
+                    }
+                }
+
+                for(let productArray of goodsList){
+                    if(productTitle.localeCompare(productArray[0]) == 0){
+                        productArray[0] = newTitle;
+                        updateLocalStorage();
+                    }
+                }
+            } else {
+                window.alert("Надана порожня назва або назва товару, який вже існує!");
             }
-        }
+            
+        });
 
-        cardsArray = [].slice.call(cartRows[3].querySelectorAll(".amount-box"));
-        for(const card of cardsArray){
-            if(card.dataset.name === productName) {
-                card.querySelector(".amount-title").textContent = newDiv.textContent;
-                card.dataset.name = newDiv.textContent;
-            }
-        }
-    });
-    titleInput.focus();
+        titleInput.focus();
+    }
+    
   }
