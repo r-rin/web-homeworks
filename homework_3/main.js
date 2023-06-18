@@ -26,9 +26,11 @@ window.onload = () => {
 
 function isUnique(title) {
     for(let productArray of goodsList){
-        let existingTitle = String(productArray[0]).toLowerCase().replace(/\s/g,'');
-        if(existingTitle.localeCompare(title.toLowerCase().replace(/\s/g,'')) == 0) return false;
-    }
+        let existingTitle = String(productArray[0]).toLowerCase();
+        if(existingTitle.localeCompare(title.toLowerCase()) == 0){
+            return false;
+        }
+    } 
     return true;
 }
 
@@ -75,9 +77,9 @@ function addProduct(productArray) {
 
 
 function addNewProduct() {
-    const productName = document.querySelector(".add-product-field").value.trim();
+    const productName = document.querySelector(".add-product-field").value.trim().replace(/\s+/g,' ');
     let array = [productName, 1, false];
-    if((productName.replace(/\s/g,'').length != 0) && isUnique(productName)){
+    if((productName.length != 0) && isUnique(productName)){
         addProduct(array);
         goodsList.push(array);
         updateLocalStorage();
