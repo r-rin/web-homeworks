@@ -88,6 +88,13 @@ function addNewProduct() {
     }
 }
 
+let searchBar = productsList.querySelectorAll(".row")[0].querySelector(".add-product-field");
+searchBar.addEventListener("keydown", function(event){
+    if(event.which == 13){
+        addNewProduct();
+    }
+});
+
 function changeAmount(element, isIncrease) {
     let productName = element.parentElement.parentElement.dataset.name;
 
@@ -310,6 +317,5 @@ function editTitle(element) {
         });
 
         titleInput.focus();
-    }
-    
-  }
+    } 
+}
