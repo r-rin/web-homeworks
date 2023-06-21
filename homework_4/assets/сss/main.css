@@ -79,7 +79,7 @@ header {
     color: var(--header-text-color);
 }
 
-#header-content div:first-child > span span {
+#header-content div:first-child span {
     align-self: center;
 }
 
@@ -94,7 +94,7 @@ header {
 
 #header-content div:first-child button{
     height: 4vh;
-    width: 75px;
+    width: 9vh;
     min-width: fit-content;
     background: var(--button-gradient-color);
     border: 1px solid var(--badge-border-color);
@@ -150,6 +150,7 @@ header {
 
 .badge .dotted-line {
     border-top: 2px dotted var(--badge-border-color);
+    margin: 2px 0px;
 }
 
 /* Top badge elements */
