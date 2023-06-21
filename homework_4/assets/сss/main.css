@@ -1,0 +1,197 @@
+:root {
+    --header-color: rgba(5, 5, 5, 75%);
+    --header-text-color: rgb(161, 161, 161);
+
+    --button-gradient-color: linear-gradient(to bottom, rgb(235, 156, 50), rgb(232, 130, 47));
+    --button-border-color: rgb(221, 124, 45);
+
+    --decrease-button-color: linear-gradient(to bottom, rgb(218, 80, 74), rgb(196, 45, 40));
+    --decrease-border-color: rgb(187, 43, 38);
+
+    --increase-button-color: linear-gradient(to bottom, rgb(87, 185, 86), rgb(69, 152, 62));
+    --increase-border-color: rgb(60, 140, 60);
+
+    --remove-button-color: linear-gradient(to bottom, rgb(254, 254, 254), rgb(213, 213, 213));
+    --remove-border-color: rgb(199, 199, 199);
+    --orange-elements-color: rgb(231, 119, 46);
+
+    --badge-color: rgb(235, 135, 58);
+    --badge-border-color: rgb(188, 96, 3);
+
+    --black-text-color: rgb(38, 38, 38);
+    --pizza-title-color: rgb(237, 107, 55);
+
+    --filter-button-selected: rgb(231, 119, 46);
+
+    --main-background-color: rgb(255, 254, 245);
+
+    --footer-color: linear-gradient(to bottom, rgb(254, 254, 254), rgb(213, 213, 213));
+    --footer-border-color: rgb(199, 199, 199);
+    --footer-height: 15vh
+}
+
+body {
+    position: relative;
+    min-height: 100vh;
+    margin: 0;
+    font-family: Helvetica, sans-serif;
+    background-color: var(--main-background-color);
+}
+
+header {
+    position: fixed;
+    top: 0;
+    width: 100%;
+    height: 10.3vh;
+    background-color: var(--header-color);
+    align-items: center;
+    display: flex;
+}
+
+#header-content {
+    width: 100%;
+    height: 10.3vh;
+    margin: 1vh 20px 0 110px;
+}
+
+#header-content span {
+    align-self: center;
+    font-size: 2vh;
+}
+
+#header-content > div {
+    display: flex;
+    height: 4vh;
+}
+
+
+#header-content > hr {
+    margin: 0;
+    box-sizing: border-box;
+    border: 1px solid var(--header-text-color);
+    box-shadow: 0px 1px 0px rgb(100, 100, 100);
+    margin: 0.5vh 0px;
+}
+
+#header-content div:first-child > span {
+    width: auto;
+    display: contents;
+    color: var(--header-text-color);
+}
+
+#header-content div:first-child > span span {
+    align-self: center;
+}
+
+#header-content div:last-child > span {
+    color: rgb(255, 255, 255);
+}
+
+#header-content div:first-child {
+    display: flex;
+    justify-content:space-between;
+}
+
+#header-content div:first-child button{
+    height: 4vh;
+    width: 75px;
+    min-width: fit-content;
+    background: var(--button-gradient-color);
+    border: 1px solid var(--badge-border-color);
+    color: rgb(255, 255, 255);
+    border-radius: 5px;
+    font-size: 1.8vh;
+    box-sizing: border-box;
+}
+
+/* BADGE SELECTORS */
+.badge {
+    position: fixed;
+    left: 10px;
+    width: 80px;
+    height: 90px;
+    box-sizing: border-box;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-end;
+    z-index: 1;
+}
+
+.badge .badge-content {
+    background-color: var(--badge-color);
+    border: 1px solid var(--badge-border-color);
+    border-top: 0;
+    border-bottom: 0;
+    width: 100%;
+    height: 100%;
+    padding: 10px;
+    box-sizing: border-box;
+}
+
+.badge > div {
+    color: rgb(255, 255, 255);
+    text-align: center;
+    font-weight: bolder;
+    font-size:small;
+}
+
+.badge img {
+    box-sizing: border-box;
+    width: 80px;
+}
+
+/* Bottom badge */
+.badge[data-position="bottom"] {
+    bottom: 0px;
+    height: 90px;
+    justify-content: flex-start;
+}
+
+.badge .dotted-line {
+    border-top: 2px dotted var(--badge-border-color);
+}
+
+/* Top badge elements */
+.badge[data-position="top"] img {
+    width: 80px;
+    transform: rotate(180deg);
+}
+
+.badge[data-position="top"] .badge-content{
+    padding: 20px 0 0 0;
+}
+
+.badge[data-position="top"] .badge-content div{
+    font-size: 2.2ch;
+}
+
+.badge[data-position="top"] .badge-content div:last-child{
+    font-size: 2.9ch;
+}
+
+main {
+    height: 100%;
+    padding-top: 10.3vh;
+    box-sizing: border-box;
+    padding-bottom: var(--footer-height);
+}
+
+footer {
+    position: absolute;
+    bottom: 0;
+    height: var(--footer-height);
+    width: 100%;
+    background: var(--footer-color);
+    border-top: 1px solid var(--footer-border-color);
+}
+
+footer p{
+    text-align: center;
+    font-size: 2.0vh;
+    color: var(--header-text-color);
+}
+
+footer p:first-child {
+    margin-top: 4vh;
+}
