@@ -239,3 +239,19 @@ function createPizzaCard(pizza){
 
     return templateNode.cloneNode(true);
 }
+
+function hideCart(){
+    let asideNode = document.querySelector("aside");
+    let status = asideNode.dataset.status;
+    let button = document.querySelector("#hide-cart");
+
+    if(status == "open"){
+        asideNode.style.width = "5vh"; 
+        asideNode.dataset.status = "closed";
+        button.style.transform = "rotate(180deg)";
+    } else {
+        asideNode.style.width = "45vh"; 
+        asideNode.dataset.status = "open";
+        button.style.transform = "rotate(0deg)";
+    }
+}

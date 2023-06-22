@@ -27,7 +27,7 @@
 
     --footer-color: linear-gradient(to bottom, rgb(254, 254, 254), rgb(213, 213, 213));
     --footer-border-color: rgb(199, 199, 199);
-    --footer-height: 15vh
+    --footer-height: 15vh;
 }
 
 body {
@@ -41,11 +41,13 @@ body {
 header {
     position: fixed;
     top: 0;
-    width: calc(100% - 40vh);
+    width: calc(100% - 5vh);
+    overflow: hidden;
     height: 10.3vh;
     background-color: var(--header-color);
     align-items: center;
     display: flex;
+    transition: all 0.5s ease-out;
     z-index: 1;
 }
 
@@ -185,12 +187,30 @@ aside {
     position: fixed;
     height: 100%;
     right: 0;
-    width: 40vh;
+    width: 45vh;
     display: flex;
-    flex-direction: column;
+    flex-direction: row;
     background-color: rgb(245, 245, 245);
     box-shadow: -5px 10.5vh 5px lightgray;
+    transition: all 0.5s ease-out;
     z-index: 3;
+}
+
+#hide-cart {
+    min-width: 5vh;
+    border: 0;
+    transition: all 0.5s ease-out;
+    background-color: rgba(0, 0, 0, 0);
+    font-weight: bold;
+    font-size: 2vh;
+}
+
+aside > div {
+    display: flex;
+    width: 40vh;
+    flex-direction: column;
+    background-color: rgb(245, 245, 245);
+    overflow: hidden;
 }
 
 .aside-header{
@@ -201,6 +221,7 @@ aside {
     padding: 1vh;
     box-sizing: border-box;
     background-color: rgb(255, 255, 255);
+    overflow: hidden;
 }
 
 .aside-header h4 {
@@ -211,7 +232,7 @@ aside {
 }
 
 #clear-cart {
-    width: 18vh;
+    min-width: 18vh;
     padding: 0;
     border: 0;
     color: var(--header-text-color);
@@ -263,9 +284,12 @@ aside {
 
 main {
     height: 100%;
-    padding: 10.3vh 40vh 0 0;
+    min-width: calc(100% - 5vh);
+    overflow-x: scroll;
+    padding: 10.3vh 5vh 0 0;
     padding-bottom: var(--footer-height);
     align-content: center;
+    transition: all 0.5s ease-out;
 }
 
 main h1 {
@@ -273,6 +297,7 @@ main h1 {
     justify-content: center;
     align-items: center;
     font-size: 3.1vh;
+    transition: all 0.5s ease-out;
 }
 
 .pizza-amount {
@@ -414,9 +439,10 @@ footer {
     position: absolute;
     bottom: 0;
     height: var(--footer-height);
-    width: calc(100% - 40vh);
+    width: calc(100% - 5vh);
     background: var(--footer-color);
     border-top: 1px solid var(--footer-border-color);
+    transition: all 0.5s ease-out;
 }
 
 footer p{
@@ -429,7 +455,7 @@ footer p:first-child {
     margin-top: 4vh;
 }
 
-@media (max-aspect-ratio: 8/5) {
+@media (max-aspect-ratio: 250/191) {
     #pizza-list {
         grid-template-columns: 1fr 1fr;
     }
@@ -439,7 +465,7 @@ footer p:first-child {
     }
 }
 
-@media screen and (max-aspect-ratio: 17/14) {
+@media screen and (max-aspect-ratio: 165/191) {
     
     #pizza-list {
         grid-template-columns: 1fr;
@@ -450,16 +476,14 @@ footer p:first-child {
     }
 }
 
-@media screen and (max-aspect-ratio: 1230/1528) {
+@media screen and (max-aspect-ratio: 335/382) {
     
     main {
-        min-width: 305px;
-        overflow-x: scroll;
+        min-width: 325px;
     }
 
     header {
-        min-width: 305px;
-        overflow-x: hidden;
+        min-width: 325px;
     }
 
     #login-button{

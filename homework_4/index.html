@@ -7,27 +7,30 @@
     <link rel="stylesheet" type="text/css" href="assets/сss/main.css">
 </head>
 <body>
-    <aside>
-        <div class="aside-header">
-            <h4>    
-                Замовлення
-                <span class="pizza-amount">0</span>
-            </h4>
-            <button id="clear-cart">Очистити замовлення</button>
-        </div>
-        <div id="pizza-cart">
-                
-        </div>
-        <div class="aside-checkout">
-            <div>
-                <span>
-                    Сума замовлення
-                </span>
-                <span id="checkout-total">
-                    924 грн
-                </span>
+    <aside data-status="open">
+        <button id="hide-cart" onclick="hideCart()">→</button>
+        <div>
+            <div class="aside-header">
+                <h4>    
+                    Замовлення
+                    <span class="pizza-amount">0</span>
+                </h4>
+                <button id="clear-cart">Очистити замовлення</button>
             </div>
-            <button id="checkout-button">Замовити</button>
+            <div id="pizza-cart">
+                    
+            </div>
+            <div class="aside-checkout">
+                <div>
+                    <span>
+                        Сума замовлення
+                    </span>
+                    <span id="checkout-total">
+                        924 грн
+                    </span>
+                </div>
+                <button id="checkout-button">Замовити</button>
+            </div>  
         </div>
     </aside>
     <div class="badge" data-position="top">
