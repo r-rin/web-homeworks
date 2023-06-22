@@ -7,6 +7,29 @@
     <link rel="stylesheet" type="text/css" href="assets/сss/main.css">
 </head>
 <body>
+    <aside>
+        <div class="aside-header">
+            <h4>    
+                Замовлення
+                <span class="pizza-amount">0</span>
+            </h4>
+            <button id="clear-cart">Очистити замовлення</button>
+        </div>
+        <div id="pizza-cart">
+                
+        </div>
+        <div class="aside-checkout">
+            <div>
+                <span>
+                    Сума замовлення
+                </span>
+                <span id="checkout-total">
+                    924 грн
+                </span>
+            </div>
+            <button id="checkout-button">Замовити</button>
+        </div>
+    </aside>
     <div class="badge" data-position="top">
         <div class="badge-content">
             <div>PIZZA</div>
@@ -22,29 +45,33 @@
                     <span>24 години / 7 днів на тиждень</span>
                     <span>Безкоштовна доставка піци</span>
                 </span>
-                <button id="login-button">Увійти</button>
+                <button class="button" id="login-button">Увійти</button>
             </div>
             <hr/>
             <div>
-                <span>Піца</span>  
+                <span>Піца</span>
+                <button class="button" id="hidden-login-button">Увійти</button>
             </div>
         </section>
     </header>
-    <main>
+    <main>       
         <section>
-            <h1>Усі піци</h1>
-            <span>8</span>
+            <h1>
+                Усі піци
+                <span class="pizza-amount"></span>
+            </h1>
         </section>
         <section id="filter-list">
-            <button>Усі</button>
-            <button>Мʼясні</button>
-            <button>З ананасами</button>
-            <button>З грибами</button>
-            <button>З морепродуктами</button>
-            <button>Веганські</button>
+            <button data-filter="all" data-status="selected">Усі</button>
+            <button data-filter="meat">Мʼясні</button>
+            <button data-filter="pineapple">З ананасами</button>
+            <button data-filter="mushroom">З грибами</button>
+            <button data-filter="fish">З морепродуктами</button>
+            <button data-filter="vegan">Веганські</button>
         </section>
-        <section id="pizza-list">
-            
+        <section>
+            <section id="pizza-list">
+            </section> 
         </section>
     </main>
     <footer>
@@ -61,5 +88,42 @@
             <div>-20%</div> 
         </div>
     </div>
+
+    <template id="pizza-card-template">
+        <div class="pizza-card" data-id="">
+            <img class="pizza-image" src="" alt="Pizza image"/>
+            <div class="pizza-title"></div>
+            <div>
+                <div class="pizza-hint"></div>
+                <div class="pizza-contents"></div>
+            </div>
+            <div class="pizza-prices" data-available="2">
+                <div class="pizza-description" data-size="small">
+                    <img src="assets/images/size-icon.svg"/>
+                </div>
+                <div class="pizza-description" data-size="big">
+                    <img src="assets/images/size-icon.svg"/>
+                </div>
+                <div class="pizza-description" data-size="small">
+                    <img src="assets/images/weight.svg"/>
+                </div>
+                <div class="pizza-description" data-size="big">
+                    <img src="assets/images/weight.svg"/>
+                </div>
+                <div class="pizza-price-label" data-size="small">
+                    <div class="pizza-price"></div>
+                    грн.
+                </div>
+                <div class="pizza-price-label" data-size="big">
+                    <div class="pizza-price"></div>
+                    грн.
+                </div>
+                <button class="button" data-size="small">Купити</button>
+                <button class="button" data-size="big">Купити</button>
+            </div>
+        </div>
+    </template>
+
+    <script src="main.js"></script>
 </body>
 </html>
