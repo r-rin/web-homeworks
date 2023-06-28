@@ -7,18 +7,17 @@
     <link rel="stylesheet" type="text/css" href="assets/сss/main.css">
 </head>
 <body>
-    <aside data-status="open">
+    <aside data-status="closed">
         <button id="hide-cart" onclick="hideCart()">→</button>
         <div>
             <div class="aside-header">
                 <h4>    
                     Замовлення
-                    <span class="pizza-amount">0</span>
+                    <span class="pizza-amount" id="cart-amount">0</span>
                 </h4>
-                <button id="clear-cart">Очистити замовлення</button>
+                <button onclick="clearCart()" id="clear-cart">Очистити замовлення</button>
             </div>
-            <div id="pizza-cart">
-                    
+            <div id="pizza-cart">  
             </div>
             <div class="aside-checkout">
                 <div>
@@ -26,7 +25,7 @@
                         Сума замовлення
                     </span>
                     <span id="checkout-total">
-                        924 грн
+                        0 грн
                     </span>
                 </div>
                 <button id="checkout-button">Замовити</button>
@@ -61,16 +60,16 @@
         <section>
             <h1>
                 Усі піци
-                <span class="pizza-amount"></span>
+                <span class="pizza-amount" id="available-amount"></span>
             </h1>
         </section>
         <section id="filter-list">
-            <button data-filter="all" data-status="selected">Усі</button>
-            <button data-filter="meat">Мʼясні</button>
-            <button data-filter="pineapple">З ананасами</button>
-            <button data-filter="mushroom">З грибами</button>
-            <button data-filter="fish">З морепродуктами</button>
-            <button data-filter="vegan">Веганські</button>
+            <button onclick="applyFilter(this)" data-filter="all" data-status="selected">Усі</button>
+            <button onclick="applyFilter(this)" data-filter="meat" data-status="">Мʼясні</button>
+            <button onclick="applyFilter(this)" data-filter="pineapple" data-status="">З ананасами</button>
+            <button onclick="applyFilter(this)" data-filter="mushroom" data-status="">З грибами</button>
+            <button onclick="applyFilter(this)" data-filter="ocean" data-status="">З морепродуктами</button>
+            <button onclick="applyFilter(this)" data-filter="vegan" data-status="">Веганські</button>
         </section>
         <section>
             <section id="pizza-list">
@@ -121,10 +120,36 @@
                     <div class="pizza-price"></div>
                     грн.
                 </div>
-                <button class="button" data-size="small">Купити</button>
-                <button class="button" data-size="big">Купити</button>
+                <button onclick="addToCart(this)" class="button" data-size="small">Купити</button>
+                <button onclick="addToCart(this)" class="button" data-size="big">Купити</button>
             </div>
         </div>
+    </template>
+
+    <template id="cart-row-template">
+        <div class="cart-row" data-id="" data-type="">
+            <div class="pizza-cart-info">
+                <div class="pizza-cart-title"></div>
+                <div class="pizza-cart-data">
+                    <span>
+                        <img src="assets/images/size-icon.svg"/>    
+                    </span>
+                    <span>
+                        <img src="assets/images/weight.svg"/> 
+                    </span>
+                </div>
+                <div class="pizza-cart-controls">
+                    <span class="pizza-cart-price"></span>
+                    <span class="amount-box">
+                        <button onclick="decreaseAmount(this)" class="decrease-button" style="padding-bottom: 0.3vh;">–</button>
+                        <span class="cart-amount"></span>
+                        <button onclick="increaseAmount(this)" class="increase-button">+</button>
+                    </span>
+                    <button onclick="removeFromCart(this)" class="remove-button">✖</button>
+                </div>
+            </div>
+            <img src="./assets/images/pizza_1.jpg" alt="Pizza image"/>
+        </div> 
     </template>
 
     <script src="main.js"></script>

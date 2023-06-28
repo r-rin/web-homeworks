@@ -47,7 +47,6 @@ header {
     background-color: var(--header-color);
     align-items: center;
     display: flex;
-    transition: all 0.5s ease-out;
     z-index: 1;
 }
 
@@ -187,30 +186,34 @@ aside {
     position: fixed;
     height: 100%;
     right: 0;
-    width: 45vh;
+    width: 50vh;
     display: flex;
     flex-direction: row;
     background-color: rgb(245, 245, 245);
     box-shadow: -5px 10.5vh 5px lightgray;
-    transition: all 0.5s ease-out;
+    transition: transform 0.5s ease-out;
     z-index: 3;
+    transform: translate(45vh);
 }
 
 #hide-cart {
     min-width: 5vh;
     border: 0;
-    transition: all 0.5s ease-out;
+    transition: transform 0.5s ease-out;
     background-color: rgba(0, 0, 0, 0);
     font-weight: bold;
     font-size: 2vh;
+    color: rgb(20, 20, 20);
+    transform: rotate(180deg);
 }
 
 aside > div {
     display: flex;
-    width: 40vh;
+    width: 45vh;
     flex-direction: column;
     background-color: rgb(245, 245, 245);
     overflow: hidden;
+    border-left: 1px solid var(--remove-border-color);
 }
 
 .aside-header{
@@ -243,6 +246,115 @@ aside > div {
 
 #pizza-cart {
     height: 100%;
+    overflow-y: scroll;
+}
+
+.cart-row {
+    display: flex;
+    flex-direction: row;
+    height: 15vh;
+    overflow: hidden;
+    border-bottom: 1px solid var(--footer-border-color);
+}
+
+.pizza-cart-info {
+    display: grid;
+    min-width: 38.5vh;
+    overflow: hidden;
+    padding: 1vh 3vh;
+    grid-template-columns: 1fr;
+    box-sizing: border-box;
+}
+
+.pizza-cart-info > * {
+    align-self: center;
+}
+
+.pizza-cart-title {
+    color: var(--orange-elements-color);
+    font-size: 2.7vh;
+}
+
+.pizza-cart-data > span{
+    display: inline-flex;
+    margin-right: 2vh;
+    align-items: center;
+    font-size: 1.8vh;
+    flex-wrap: nowrap;
+}
+
+.pizza-cart-data img{
+    margin-right: 0.5vh;
+    height: 1.5vh;
+    width: 1.5vh;
+}
+
+.pizza-cart-controls {
+    display: grid;
+    grid-template-columns: 2fr 2fr 1fr;
+    justify-content: center;
+    flex-wrap: nowrap;
+    align-items: center;
+}
+
+.pizza-cart-price {
+    font-size: 2vh;
+    font-weight: bold;
+}
+
+.cart-row > img {
+    height: 13vh;
+    width: 13vh;
+    position: relative;
+    margin: 1vh 0;
+    border-radius: 50%;
+}
+
+.amount-box {
+    display: flex;
+    justify-self: center;
+    justify-content: space-between;
+    width: 100%;
+}
+
+.cart-amount {
+    align-self: center;
+}
+
+.pizza-cart-controls button{
+    height: 4vh;
+    width: 4vh;
+    font-weight: bolder;
+    font-size: 3vh;
+    padding: 0;
+    color: rgb(255, 255, 255);
+    border-radius: 50%;
+    flex-shrink: 0;
+}
+
+.decrease-button {
+    border: 1px solid var(--decrease-border-color);
+    background: var(--decrease-button-color);
+}
+
+.cart-amount {
+    font-size: 2vh;
+}
+
+.increase-button {
+    padding: unset;
+    border: 1px solid var(--increase-border-color);
+    background: var(--increase-button-color);
+}
+
+.pizza-cart-controls > button {
+    padding: unset;
+    font-weight: normal;
+    font-size: 2vh;
+    border: 1px solid var(--remove-border-color);
+    background: var(--remove-button-color);
+    color: var(--orange-elements-color); 
+    justify-self: right;
 }
 
 .aside-checkout {
@@ -273,7 +385,7 @@ aside > div {
 }
 
 #checkout-button {
-    width: 38vh;
+    width: 43vh;
     height: 6.2vh;
     color: rgb(255, 255, 255);
     background: var(--button-gradient-color);
@@ -289,7 +401,6 @@ main {
     padding: 10.3vh 5vh 0 0;
     padding-bottom: var(--footer-height);
     align-content: center;
-    transition: all 0.5s ease-out;
 }
 
 main h1 {
@@ -297,7 +408,6 @@ main h1 {
     justify-content: center;
     align-items: center;
     font-size: 3.1vh;
-    transition: all 0.5s ease-out;
 }
 
 .pizza-amount {
@@ -442,7 +552,6 @@ footer {
     width: calc(100% - 5vh);
     background: var(--footer-color);
     border-top: 1px solid var(--footer-border-color);
-    transition: all 0.5s ease-out;
 }
 
 footer p{

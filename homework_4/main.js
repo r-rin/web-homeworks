@@ -1,179 +1,25 @@
-var pizzaArray = [
-    {
-        id:1,
-        icon:'assets/images/pizza_7.jpg',
-        title: "Імпреза",
-        type: 'М’ясна піца',
-        content: {
-            meat: ['балик', 'салямі'],
-            chicken: ['куриця'],
-            cheese: ['сир моцарелла', 'сир рокфорд'],
-            pineapple: ['ананаси'],
-            additional: ['томатна паста', 'петрушка']
-        },
-        small_size:{
-            weight: 370,
-            size: 30,
-            price: 99
-        },
-        big_size:{
-            weight: 660,
-            size: 40,
-            price: 169
-        },
-        is_new:true,
-        is_popular:true
 
-    },
-    {
-        id:2,
-        icon:'assets/images/pizza_2.jpg',
-        title: "BBQ",
-        type: 'М’ясна піца',
-        content: {
-            meat: ['мисливські ковбаски', 'ковбаски папероні', 'шинка'],
-            cheese: ['сир домашній'],
-            mushroom: ['шампінйони'],
-            additional: ['петрушка', 'оливки']
-        },
-        small_size:{
-            weight: 460,
-            size: 30,
-            price: 139
-        },
-        big_size:{
-            weight: 840,
-            size: 40,
-            price: 199
-        },
-        is_popular:true
-    },
-    {
-        id:3,
-        icon:'assets/images/pizza_1.jpg',
-        title: "Міксовий поло",
-        type: 'М’ясна піца',
-        content: {
-            meat: ['вітчина', 'куриця копчена'],
-            cheese: ['сир моцарелла'],
-            pineapple: ['ананаси'],
-            additional: ['кукурудза', 'петрушка', 'соус томатний']
-        },
-        small_size:{
-            weight: 430,
-            size: 30,
-            price: 115
-        },
-        big_size:{
-            weight: 780,
-            size: 40,
-            price: 179
-        }
-    },
-    {
-        id:4,
-        icon:'assets/images/pizza_5.jpg',
-        title: "Сициліано",
-        type: 'М’ясна піца',
-        content: {
-            meat: ['вітчина', 'салямі'],
-            cheese: ['сир моцарелла'],
-            mushroom: ['шампінйони'],
-            additional: ['перець болгарський',  'соус томатний']
-        },
-        small_size:{
-            weight: 450,
-            size: 30,
-            price: 111
-        },
-        big_size:{
-            weight: 790,
-            size: 40,
-            price: 169
-        }
-    },
-    {
-        id:17,
-        icon:'assets/images/pizza_3.jpg',
-        title: "Маргарита",
-        type: 'Вега піца',
-        content: {
-            cheese: ['сир моцарелла', 'сир домашній'],
-            tomato: ['помідори'],
-            additional: ['базилік', 'оливкова олія', 'соус томатний']
-        },
-        small_size:{
-            weight: 370,
-            size: 30,
-            price: 89
-        }
-    },
-    {
-        id:43,
-        icon:'assets/images/pizza_6.jpg',
-        title: "Мікс смаків",
-        type: 'М’ясна піца',
-        content: {
-            meat: ['ковбаски'],
-            cheese: ['сир моцарелла'],
-            mushroom: ['шампінйони'],
-            pineapple: ['ананаси'],
-            additional: ['цибуля кримська', 'огірки квашені', 'соус гірчичний']
-        },
-        small_size:{
-            weight: 470,
-            size: 30,
-            price: 115
-        },
-        big_size:{
-            weight: 780,
-            size: 40,
-            price: 180
-        }
-    },
-    {
-        id:90,
-        icon:'assets/images/pizza_8.jpg',
-        title: "Дольче Маре",
-        type: 'Морська піца',
-        content: {
-            ocean: ['криветки тигрові', 'мідії', 'ікра червона', 'філе червоної риби'],
-            cheese: ['сир моцарелла'],
-            additional: ['оливкова олія', 'вершки']
-        },
-        big_size:{
-            weight: 845,
-            size: 40,
-            price: 399
-        }
-    },
-    {
-        id:6,
-        icon:'assets/images/pizza_4.jpg',
-        title: "Россо Густо",
-        type: 'Морська піца',
-        content: {
-            ocean: ['ікра червона', 'лосось копчений'],
-            cheese: ['сир моцарелла'],
-            additional: ['оливкова олія', 'вершки']
-        },
-        small_size:{
-            weight: 400,
-            size: 30,
-            price: 189
-        },
-        big_size:{
-            weight: 700,
-            size: 40,
-            price: 299
-        }
+async function fetchData() {
+    try {
+      const response = await fetch('./assets/js/Pizza_List.json');
+      const data = await response.json();
+      return data;
+    } catch (error) {
+      console.log('Error:', error);
     }
-];
+  }
+  
 
 var pizzaListNode = document.querySelector("#pizza-list");
+var pizzaCartNode = document.querySelector("#pizza-cart");
 var pizzaCardTemplate = document.querySelector("#pizza-card-template");
+var pizzaCartTemplate = document.querySelector("#cart-row-template");
+var pizzaCartStorage = [];
+var cartAmount = 0;
+var pizzaArray;
 
-window.onload = () => {
+window.onload = async () => {
+    pizzaArray = await fetchData();
 
     document.querySelector("h1").querySelector(".pizza-amount").textContent = pizzaArray.length;
 
@@ -181,6 +27,216 @@ window.onload = () => {
         let cardNode = createPizzaCard(pizzaObject);
         pizzaListNode.appendChild(cardNode);
     }
+
+    if(localStorage.getItem("pizzaCartStorage") != null){
+        pizzaCartStorage = JSON.parse(localStorage.getItem("pizzaCartStorage"));
+        cartAmount = pizzaCartStorage.length;
+
+        loadCartFromStorage();
+    } else {
+        updateLocalStorage();
+    }
+    countTotal();
+    document.querySelector("#cart-amount").textContent = cartAmount;
+}
+
+function loadCartFromStorage() {
+    /* pizzaCartItem = {id: ?,
+                        type: "small"/"big",
+                        amount: ?} */
+    for(pizzaCartItem of pizzaCartStorage){
+        let id = pizzaCartItem.id;
+        let type = pizzaCartItem.type;
+        let amount = pizzaCartItem.amount;
+
+        let cartRow = createPizzaInCart(id, type, amount);
+        pizzaCartNode.appendChild(cartRow);
+    }
+}
+
+function createPizzaInCart(id, type, amount){
+    let pizzaObject = null;
+
+    for(pizza of pizzaArray){
+        if(pizza.id == id){
+            pizzaObject = pizza;
+        }
+    }
+
+    if(pizzaObject != null){
+        let templateNode = pizzaCartTemplate.content.querySelector(".cart-row").cloneNode(true);
+
+        templateNode.dataset.id = pizzaObject.id;
+        templateNode.dataset.type = type;
+
+        let pizzaTitle = pizzaObject.title;
+        let pizzaData;
+
+        if(type == "small"){
+            pizzaTitle += " (Мала)"
+            pizzaData = pizzaObject.small_size;
+        } else if(type == "big"){
+            pizzaTitle += " (Велика)"
+            pizzaData = pizzaObject.big_size;
+        }
+
+        templateNode.querySelector(".pizza-cart-title").textContent = pizzaTitle;
+
+        let pizzaDataNode = templateNode.querySelector(".pizza-cart-data").querySelectorAll("span");
+
+        pizzaDataNode[0].innerHTML = "<img src=\"assets/images/size-icon.svg\"/>"+pizzaData.size;
+        pizzaDataNode[1].innerHTML = "<img src=\"assets/images/weight.svg\"/>"+pizzaData.weight;
+
+        templateNode.querySelector(".pizza-cart-price").textContent = Number(amount*pizzaData.price) + "грн";
+        templateNode.querySelector(".cart-amount").textContent = Number(amount);
+
+        templateNode.querySelectorAll("img")[2].src = pizzaObject.icon;
+
+        return templateNode;
+    }
+
+    return null;
+}
+
+function containsPizza(obj, list) {
+    for(let cartObject of list){
+        if(cartObject.id == obj.id && cartObject.type == obj.type){
+            return true;
+        }
+    }
+    return false;
+}
+
+function updateLocalStorage(){
+    localStorage.setItem("pizzaCartStorage", JSON.stringify(pizzaCartStorage));
+}
+
+function addToCart(button){
+    let pizzaType = button.dataset.size;
+    let pizzaId = button.parentElement.parentElement.dataset.id;
+
+    let pizzaObj = {id: pizzaId, type: pizzaType, amount: 1};
+
+    if(containsPizza(pizzaObj, pizzaCartStorage)){
+        changeAmount(pizzaId, pizzaType, 1);
+    } else {
+        let cartRow = createPizzaInCart(pizzaObj.id, pizzaObj.type, 1);
+        pizzaCartNode.appendChild(cartRow);
+        pizzaCartStorage.push(pizzaObj);
+        updateInCartAmount();
+        updateLocalStorage();
+    }
+    countTotal();
+}
+
+function changeAmount(pizzaId, pizzaType, value){
+    let cartRow = pizzaCartNode.querySelector(`.cart-row[data-id="${pizzaId}"][data-type="${pizzaType}"]`);
+
+    if(cartRow != null){
+        let price = cartRow.querySelector(".pizza-cart-price");
+        let amount = cartRow.querySelector(".cart-amount");
+
+        let pricePerUnit =  Number(price.textContent.slice(0, -3)) / Number(amount.textContent);
+        
+        amount.textContent = Number(amount.textContent) + value;
+        
+        price.textContent = pricePerUnit * Number(amount.textContent) + "грн";
+
+        for(let cartObj of pizzaCartStorage){
+            if(cartObj.id == pizzaId && cartObj.type == pizzaType){
+                cartObj.amount += value;
+                updateLocalStorage();
+            }
+        }
+        countTotal();
+    }
+}
+
+function decreaseAmount(button){
+    let rowContainer = button.parentElement.parentElement.parentElement.parentElement;
+    let id = rowContainer.dataset.id;
+    let type = rowContainer.dataset.type;
+
+    let cartAmount = button.parentElement.querySelector(".cart-amount");
+    let amountInCart = Number(cartAmount.textContent);
+    if(amountInCart < 2){
+        rowContainer.remove();
+        for(let cartObj of pizzaCartStorage){
+            if(cartObj.id == id && cartObj.type == type){
+                let pizzaIndex = pizzaCartStorage.indexOf(cartObj);
+                pizzaCartStorage.splice(pizzaIndex, 1);
+                updateInCartAmount();
+                updateLocalStorage();
+                countTotal();
+            }
+        }
+    } else {
+        changeAmount(id, type, -1);
+    }
+}
+
+function increaseAmount(button){
+    let rowContainer = button.parentElement.parentElement.parentElement.parentElement;
+    let id = rowContainer.dataset.id;
+    let type = rowContainer.dataset.type;
+
+    changeAmount(id, type, 1);
+}
+
+function removeFromCart(button){
+    let rowContainer = button.parentElement.parentElement.parentElement;
+    let id = rowContainer.dataset.id;
+    let type = rowContainer.dataset.type;
+
+    rowContainer.remove();
+    for(let cartObj of pizzaCartStorage){
+        if(cartObj.id == id && cartObj.type == type){
+            let pizzaIndex = pizzaCartStorage.indexOf(cartObj);
+            pizzaCartStorage.splice(pizzaIndex, 1);
+            updateInCartAmount();
+            updateLocalStorage();
+        }
+    }
+    countTotal();
+}
+
+function clearCart(){
+    pizzaCartNode.innerHTML = "";
+    pizzaCartStorage.length = 0;
+    updateInCartAmount();
+    updateLocalStorage();
+    countTotal();
+}
+
+function updateInCartAmount(){
+    let cartAmount = pizzaCartStorage.length;
+    document.querySelector("#cart-amount").textContent = cartAmount;
+}
+
+function countTotal() {
+    let totalValue = 0;
+
+    for(let cartObject of pizzaCartStorage){
+
+        let pizzaFullData;
+        let pizzaData;
+
+        for(let existingPizza of pizzaArray){
+            if(existingPizza.id == cartObject.id){
+                pizzaFullData = existingPizza;
+            }
+        }
+
+        if(cartObject.type == "small"){
+            pizzaData = pizzaFullData.small_size;
+        } else if(cartObject.type == "big"){
+            pizzaData = pizzaFullData.big_size;
+        }
+
+        totalValue += cartObject.amount * pizzaData.price;
+    }
+
+    document.querySelector("#checkout-total").textContent = totalValue + " грн"
 }
 
 function createPizzaCard(pizza){
@@ -240,17 +296,52 @@ function createPizzaCard(pizza){
     return templateNode.cloneNode(true);
 }
 
+function applyFilter(button){
+    let filterButtonsArray = button.parentElement.querySelectorAll("button");
+    filterButtonsArray.forEach(curButton => curButton.dataset.status = "");
+
+    button.dataset.status = "selected";
+    let filter = button.dataset.filter;
+
+    loadPizzaCards(filter);
+}
+
+function loadPizzaCards(filter){
+    pizzaListNode.innerHTML = "";
+    if(filter == "all"){
+        document.querySelector("h1").querySelector(".pizza-amount").textContent = pizzaArray.length;
+        for (let pizzaObject of pizzaArray){
+            let cardNode = createPizzaCard(pizzaObject);
+            pizzaListNode.appendChild(cardNode);
+        }
+    } else if(filter == "vegan"){
+        let filteredPizzaArray = pizzaArray.filter(pizzaObject => !("meat" in pizzaObject.content) && !("ocean" in pizzaObject.content));
+        document.querySelector("h1").querySelector(".pizza-amount").textContent = filteredPizzaArray.length;
+        for (let pizzaObject of filteredPizzaArray){
+            let cardNode = createPizzaCard(pizzaObject);
+            pizzaListNode.appendChild(cardNode);
+        }
+    } else {
+        let filteredPizzaArray = pizzaArray.filter(pizzaObject => filter in pizzaObject.content);
+        document.querySelector("h1").querySelector(".pizza-amount").textContent = filteredPizzaArray.length;
+        for (let pizzaObject of filteredPizzaArray){
+            let cardNode = createPizzaCard(pizzaObject);
+            pizzaListNode.appendChild(cardNode);
+        }
+    }
+}
+
 function hideCart(){
     let asideNode = document.querySelector("aside");
     let status = asideNode.dataset.status;
     let button = document.querySelector("#hide-cart");
 
     if(status == "open"){
-        asideNode.style.width = "5vh"; 
+        asideNode.style.transform = "translate(45vh)"; 
         asideNode.dataset.status = "closed";
         button.style.transform = "rotate(180deg)";
     } else {
-        asideNode.style.width = "45vh"; 
+        asideNode.style.transform = "translate(0)"; 
         asideNode.dataset.status = "open";
         button.style.transform = "rotate(0deg)";
     }
