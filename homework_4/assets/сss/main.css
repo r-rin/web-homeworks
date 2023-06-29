@@ -187,11 +187,12 @@ aside {
     height: 100%;
     right: 0;
     width: 50vh;
+    max-width: calc(100% + 45vh);
     display: flex;
     flex-direction: row;
     background-color: rgb(245, 245, 245);
     box-shadow: -5px 10.5vh 5px lightgray;
-    transition: transform 0.5s ease-out;
+    transition: all 0.5s ease-out;
     z-index: 3;
     transform: translate(45vh);
 }
@@ -208,12 +209,12 @@ aside {
 }
 
 aside > div {
-    display: flex;
     width: 45vh;
+    display: flex;
     flex-direction: column;
     background-color: rgb(245, 245, 245);
-    overflow: hidden;
     border-left: 1px solid var(--remove-border-color);
+    overflow: scroll;
 }
 
 .aside-header{
@@ -224,7 +225,7 @@ aside > div {
     padding: 1vh;
     box-sizing: border-box;
     background-color: rgb(255, 255, 255);
-    overflow: hidden;
+    width: 45vh;
 }
 
 .aside-header h4 {
@@ -247,6 +248,7 @@ aside > div {
 #pizza-cart {
     height: 100%;
     overflow-y: scroll;
+    width: 45vh;
 }
 
 .cart-row {
@@ -255,6 +257,7 @@ aside > div {
     height: 15vh;
     overflow: hidden;
     border-bottom: 1px solid var(--footer-border-color);
+    max-width: 45vh;
 }
 
 .pizza-cart-info {
@@ -363,7 +366,7 @@ aside > div {
     box-sizing: border-box;
     padding: 0vh 1vh 1vh 1vh;
     height: 20vh;
-    width: 100%;
+    width: 45vh;
     align-items: center;
     border-top: 1px solid var(--remove-border-color);
     background: var(--footer-color);

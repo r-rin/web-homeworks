@@ -339,9 +339,11 @@ function hideCart(){
     if(status == "open"){
         asideNode.style.transform = "translate(45vh)"; 
         asideNode.dataset.status = "closed";
+        asideNode.style.maxWidth = "calc(100% + 45vh)";
         button.style.transform = "rotate(180deg)";
     } else {
         asideNode.style.transform = "translate(0)"; 
+        asideNode.style.maxWidth = "calc(100%)";
         asideNode.dataset.status = "open";
         button.style.transform = "rotate(0deg)";
     }
