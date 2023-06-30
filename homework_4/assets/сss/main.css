@@ -462,11 +462,12 @@ main section:last-child {
     align-items: center;
     width: max-content;
     margin: 0;
-    column-gap: 2vh;
-    row-gap: 2vh;
+    column-gap: 4vh;
+    row-gap: 4vh;
 }
 
 .pizza-card {
+    position: relative;
     display: flex;
     flex-direction: column;
     width: 38vh;
@@ -477,6 +478,38 @@ main section:last-child {
     border-radius: 5px;
     box-sizing: border-box;
     justify-content: space-between;
+}
+
+.pizza-card[data-ispopular="true"]::before{
+    content: "Популярна";
+    position: absolute;
+    display: flex;
+    height: 3vh;
+    top: -1vh;
+    left: -4%;
+    background-color: rgb(89, 185, 78);
+    color: white;
+    border-radius: 0.5vh;
+    padding: 0.4vh 1vh;
+    align-items: center;
+    font-weight: bold;
+    font-size: 2vh;
+}
+
+.pizza-card[data-isnew="true"]::after{
+    content: "Нова";
+    position: absolute;
+    display: flex;
+    height: 3vh;
+    top: -1vh;
+    right: -4%;
+    background-color: rgb(204, 77, 70);
+    color: white;
+    border-radius: 0.5vh;
+    padding: 0.4vh 1vh;
+    align-items: center;
+    font-weight: bold;
+    font-size: 2vh;
 }
 
 .pizza-image {

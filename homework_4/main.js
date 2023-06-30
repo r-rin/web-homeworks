@@ -293,6 +293,14 @@ function createPizzaCard(pizza){
         }
     }
 
+    if(pizza.is_popular){
+        templateNode.dataset.ispopular = "true";
+    }
+
+    if(pizza.is_new){
+        templateNode.dataset.isnew = "true";
+    }
+
     return templateNode.cloneNode(true);
 }
 
